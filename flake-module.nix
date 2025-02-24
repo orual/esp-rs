@@ -1,5 +1,5 @@
 {
-  perSystem = { config, pkgs, lib, ... }: {
+  perSystem = { config, pkgs, lib, inputs, ... }: {
     options =
       let
         inherit (lib) types;
@@ -42,23 +42,18 @@
           in
           pkgs.mkShell {
             buildInputs = with pkgs; [ 
-            esp-rs 
-            probe-rs
-            rustup 
-            espflash 
-            rust-analyzer
-            
-            pkg-config 
-            stdenv.cc 
-            bacon 
-            systemdMinimal 
-          ];
+              esp-rs 
+              probe-rs
+              rustup 
+              espflash 
+              rust-analyzer
+            ];
             shellHook = ''
-          export PS1="(esp-rs)$PS1"
-          # this is important - it tells rustup where to find the esp toolchain,
-          # without needing to copy it into your local ~/.rustup/ folder.
-          export RUSTUP_TOOLCHAIN=${esp-rs}
-          '';
+              export PS1="(esp-rs)$PS1"
+              # this is important - it tells rustup where to find the esp toolchain,
+              # without needing to copy it into your local ~/.rustup/ folder.
+              export RUSTUP_TOOLCHAIN=${esp-rs}
+              '';
           };
       };
   };
