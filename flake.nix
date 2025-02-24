@@ -33,7 +33,6 @@
         packages.default = esp-rs;
         devShells.default = pkgs.mkShell  {
           name = "esp-rs";
-          inputsFrom = [ config.just-flake.outputs.devShell ];
           buildInputs = with pkgs; [ 
             esp-rs 
             probe-rs
