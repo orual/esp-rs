@@ -1,4 +1,4 @@
-{ 
+{
   pkgs,
   archname ? "x86_64-unknown-linux-gnu"
 }:
@@ -14,7 +14,7 @@ pkgs.stdenv.mkDerivation rec {
             # sha256 = "0000000000000000000000000000000000000000000000000000";
           };
 
-    patchPhase = '' 
+    patchPhase = ''
     patchShebangs ./install.sh
     '';
 
@@ -41,6 +41,6 @@ pkgs.stdenv.mkDerivation rec {
 
     installPhase = ''
     mkdir -p $out
-    ./install.sh --destdir=$out --prefix="" --disable-ldconfig --without=rust-docs-json-preview,rust-docs
+    ./install.sh --destdir=$out --prefix="" --disable-ldconfig --components=rust-analyzer,rust-src,rustfmt,llvm-tools
     '';
 }
