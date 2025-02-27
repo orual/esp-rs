@@ -41,6 +41,6 @@ pkgs.stdenv.mkDerivation rec {
 
     installPhase = ''
     mkdir -p $out
-    ./install.sh --destdir=$out --prefix="" --disable-ldconfig --components=rust-analyzer,rust-src,rustfmt,llvm-tools
+    ./install.sh --destdir=$out --prefix="" --disable-ldconfig
     '';
 }

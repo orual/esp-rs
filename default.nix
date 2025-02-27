@@ -1,5 +1,9 @@
 {
-  pkgs,
+  pkgs ? import <nixpkgs> {
+      overlays = [
+          (import (fetchTarball "https://github.com/oxalica/rust-overlay/archive/master.tar.gz"))
+      ];
+    },
   archname ? "x86_64-linux-gnu",
 }:
 let
@@ -23,7 +27,7 @@ pkgs.stdenv.mkDerivation rec {
             # sha256 = "0000000000000000000000000000000000000000000000000000";
           };
 
-    patchPhase = '' 
+    patchPhase = ''
     patchShebangs ./install.sh
     '';
 
@@ -32,7 +36,7 @@ pkgs.stdenv.mkDerivation rec {
     installPhase = ''
     mkdir -p $out
 
-    # copy across all of esp-rust into our own output 
+    # copy across all of esp-rust into our own output
     cp -r ${esp-rust-build}/* $out
     chmod -R u+rw $out
     cp -r ${esp-xtensa-gcc}/* $out
